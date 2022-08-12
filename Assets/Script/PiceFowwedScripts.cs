@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PiceFowwedScripts : MonoBehaviour
 {
+    Rigidbody2D rigit2d;
+    float JumpPower = 700f;
    [SerializeField] private float moveSpeed;
    
    [SerializeField] private float jumpPower;
@@ -19,10 +21,14 @@ public class PiceFowwedScripts : MonoBehaviour
     // Update is called once per frame
     void Start()
     {
-       
+        this.rigit2d = GetComponent<Rigidbody2D>();
     }
     void Update()
     {
+        if(Input.GetKey(KeyCode.Space))
+        {
+            this.rigit2d.AddForce(transform.up * jumpPower);
+        }
         move();
         Inputkey();
         switch(state)
@@ -72,6 +78,7 @@ public class PiceFowwedScripts : MonoBehaviour
          state = RightWalk;
          this.transform.Translate(speed*Time.deltaTime,0,0);
        }
+      
     }
     public void move()
     {
